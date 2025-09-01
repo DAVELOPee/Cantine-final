@@ -1,0 +1,24 @@
+{
+  "name": "Cantine al Giglio",
+  "short_name": "Cantine Giglio",
+  "description": "La guida ufficiale per scoprire le cantine del festival 'CANTINE APERTE' sull'Isola del Giglio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8F0",
+  "theme_color": "#8C2D19",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
