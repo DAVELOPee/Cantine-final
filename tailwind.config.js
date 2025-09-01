@@ -6,17 +6,19 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        'sans': ['Roboto', 'sans-serif'],
-        'serif': ['Playfair Display', 'serif'],
-      },
       colors: {
-        'brand-background': '#FFF8F0',
-        'brand-primary': '#8C2D19',
-        'brand-secondary': '#D97706',
-        'brand-text': '#4B2A1E',
-        'brand-light-text': '#A67B5B',
-      }
+        'brand-background': '#F8F6F4',   // Avorio neutro elegante
+        'brand-primary': '#5B1A1A',      // Rosso vino barricato
+        'brand-secondary': '#2F3E2C',    // Verde vite scuro
+        'brand-accent': '#8C7851',       // Oro/bronzo smorzato
+        'brand-highlight': '#A27E4E',    // Oro caldo per accenti
+        'brand-text': '#2B211C',         // Marrone profondo / quasi nero
+        'brand-light-text': '#7D6654',   // Testo secondario
+      },
+      fontFamily: {
+        'sans': ['Inter', 'sans-serif'], 
+        'serif': ['Playfair Display', 'serif'], 
+      },
     },
   },
   plugins: [],
