@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* Background styles are now handled dynamically in App.tsx or Home.tsx */
+}
+
+/* Animazione generica per le pagine */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+/* Animazione lenta specifica per il riquadro della home */
+@keyframes fade-in-slow {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-slow {
+  animation: fade-in-slow 5s ease-out forwards;
+}
+
+/* Animazione per la freccia di scroll */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+/* 
+  Nasconde il messaggio di default "Usa due dita..." di Google Maps.
+  Questo permette di implementare un nostro avviso personalizzato.
+  Il selettore è specifico per evitare di nascondere altri elementi.
+*/
+.gm-style .gm-style-pbc {
+  display: none !important;
+}
