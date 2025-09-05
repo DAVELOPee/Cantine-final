@@ -152,6 +152,8 @@ const MapPage: React.FC = () => {
     // a trascinare con un dito solo, senza ottenere risultati.
     // Questo codice intercetta il tentativo di trascinamento con un dito e mostra
     // un avviso temporaneo per istruire l'utente.
+    
+   /* 
     useEffect(() => {
         const container = mapContainerRef.current;
         // Esegui solo se il contenitore della mappa esiste e l'animazione iniziale è finita.
@@ -219,7 +221,7 @@ const MapPage: React.FC = () => {
             container.removeEventListener('touchcancel', handleTouchEnd);
         };
     }, [animationComplete]); // Questa dipendenza assicura che il codice venga eseguito solo una volta completata l'animazione.
-    
+    */
     useEffect(() => {
         if (!isLoaded || !map || !animationComplete) return;
 
