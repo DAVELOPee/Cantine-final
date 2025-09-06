@@ -84,7 +84,7 @@ const CantinaDetail: React.FC<CantinaDetailProps> = ({ cantina, onBack }) => {
     <div className="max-w-4xl mx-auto animate-fade-in">
       <button
         onClick={onBack}
-        className="mb-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-secondary hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
+        className="mb-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-secondary hover:bg-brand-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-transform transform active:scale-95"
       >
         <BackIcon/>
         Tutte le Cantine
@@ -113,7 +113,7 @@ const CantinaDetail: React.FC<CantinaDetailProps> = ({ cantina, onBack }) => {
             <button
               onClick={handleGetDirections}
               disabled={isGettingLocation}
-              className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary transition-transform transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
+              className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-secondary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary transition-transform transform hover:scale-105 active:scale-100 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100"
             >
               <MapPinIcon/>
               {isGettingLocation ? 'Ricerca...' : 'Vai a piedi'}

@@ -3,6 +3,7 @@ import Home from './components/Home';
 import CantinePage from './components/CantinePage';
 import MapPage from './components/MapPage';
 import BottomNavBar from './components/BottomNavBar';
+import AddToHomeScreenPrompt from './components/AddToHomeScreenPrompt';
 
 export type ActiveView = 'home' | 'cantine' | 'mappa';
 
@@ -47,6 +48,7 @@ const App: React.FC = () => {
       </main>
       
       <BottomNavBar activeView={activeView} setActiveView={setActiveView} />
+      <AddToHomeScreenPrompt />
     </div>
   );
 };

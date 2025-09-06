@@ -21,7 +21,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-slow {
-  animation: fade-in-slow 5s ease-out forwards;
+  animation: fade-in-slow 1.5s ease-out forwards;
 }
 
 /* Animazione per la freccia di scroll */
@@ -48,4 +48,32 @@ body {
 */
 .gm-style .gm-style-pbc {
   display: none !important;
+}
+
+
+/* Animazione per il PWA prompt (bottom sheet) */
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+/* Animazione fade-in più veloce per l'overlay del PWA prompt */
+@keyframes fade-in-fast {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-fast {
+    animation: fade-in-fast 0.3s ease-out forwards;
 }

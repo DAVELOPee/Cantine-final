@@ -90,7 +90,6 @@ const MapPage: React.FC = () => {
     const [activeEntryPoint, setActiveEntryPoint] = useState<EntryPoint | null>(null);
     const [geolocationMessage, setGeolocationMessage] = useState<{ type: 'error' | 'success' | 'info'; text: string } | null>(null);
     const [animationComplete, setAnimationComplete] = useState(false);
-    const [showTouchHint, setShowTouchHint] = useState(false);
 
     const mapContainerRef = useRef<HTMLDivElement>(null);
 
@@ -130,7 +129,7 @@ const MapPage: React.FC = () => {
             if (progress < 1) {
                 requestAnimationFrame(animate);
             } else {
-                mapInstance.setOptions({ gestureHandling: 'auto' });
+                mapInstance.setOptions({ gestureHandling: 'greedy' });
                 setAnimationComplete(true);
             }
         };
@@ -142,86 +141,6 @@ const MapPage: React.FC = () => {
         setMap(null);
     }, []);
     
-    // ###################################################################################
-    // ## Funzione per mostrare l'avviso "Usa due dita per muovere la mappa" su mobile ##
-    // ###################################################################################
-    // Questo `useEffect` si attiva quando l'animazione della mappa è completa.
-    // Il suo scopo è migliorare l'esperienza utente su dispositivi touch.
-    // Google Maps di default richiede due dita per il pan (spostamento) della mappa
-    // per evitare scroll accidentali della pagina. Molti utenti non lo sanno e provano
-    // a trascinare con un dito solo, senza ottenere risultati.
-    // Questo codice intercetta il tentativo di trascinamento con un dito e mostra
-    // un avviso temporaneo per istruire l'utente.
-    
-   /* 
-    useEffect(() => {
-        const container = mapContainerRef.current;
-        // Esegui solo se il contenitore della mappa esiste e l'animazione iniziale è finita.
-        if (!container || !animationComplete) return;
-
-        // Controlla se il dispositivo è touch. In caso contrario, non fa nulla.
-        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if (!isTouch) return;
-
-        // Variabili per tracciare lo stato del tocco.
-        let touchStartPos = { x: 0, y: 0 }; // Posizione iniziale del tocco
-        let hasDragged = false;              // Flag per sapere se un trascinamento è già stato rilevato
-
-        // Gestore per l'inizio del tocco (touchstart)
-        const handleTouchStart = (e: TouchEvent) => {
-            // Se l'utente sta usando un solo dito...
-            if (e.touches.length === 1) {
-                // ...salviamo la posizione iniziale e resettiamo il flag di trascinamento.
-                touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-                hasDragged = false;
-            } else {
-                // Se l'utente usa più dita (es. per il pan/zoom), nascondiamo subito l'avviso.
-                setShowTouchHint(false);
-            }
-        };
-
-        // Gestore per il movimento del dito (touchmove)
-        const handleTouchMove = (e: TouchEvent) => {
-            // Ignora se l'utente sta usando più dita o se abbiamo già mostrato l'avviso.
-            if (e.touches.length !== 1 || hasDragged) return;
-
-            // Definiamo una soglia minima di movimento per considerarlo un "trascinamento"
-            // ed evitare di attivare l'avviso per piccoli tocchi involontari.
-            const DRAG_THRESHOLD = 10; // 10 pixel
-            const moveX = Math.abs(e.touches[0].clientX - touchStartPos.x);
-            const moveY = Math.abs(e.touches[0].clientY - touchStartPos.y);
-
-            // Se il movimento supera la soglia...
-            if (moveX > DRAG_THRESHOLD || moveY > DRAG_THRESHOLD) {
-                // ...impostiamo il flag per non mostrare l'avviso di nuovo durante questo stesso tocco...
-                hasDragged = true;
-                // ...e attiviamo la visualizzazione dell'avviso tramite lo stato di React.
-                setShowTouchHint(true);
-            }
-        };
-
-        // Gestore per la fine del tocco (touchend e touchcancel)
-        const handleTouchEnd = () => {
-            // Quando l'utente solleva il dito, nascondiamo l'avviso.
-            setShowTouchHint(false);
-        };
-
-        // Aggiungiamo gli event listener al contenitore della mappa.
-        container.addEventListener('touchstart', handleTouchStart);
-        container.addEventListener('touchmove', handleTouchMove);
-        container.addEventListener('touchend', handleTouchEnd);
-        container.addEventListener('touchcancel', handleTouchEnd); // 'touchcancel' gestisce interruzioni impreviste
-
-        // Funzione di pulizia: rimuove gli event listener quando il componente viene smontato
-        // per evitare memory leak.
-        return () => {
-            container.removeEventListener('touchstart', handleTouchStart);
-            container.removeEventListener('touchmove', handleTouchMove);
-            container.removeEventListener('touchend', handleTouchEnd);
-            container.removeEventListener('touchcancel', handleTouchEnd);
-        };
-    }, [animationComplete]); // Questa dipendenza assicura che il codice venga eseguito solo una volta completata l'animazione.
-    */
     useEffect(() => {
         if (!isLoaded || !map || !animationComplete) return;
 
@@ -411,7 +330,6 @@ const MapPage: React.FC = () => {
                             lat: parseFloat(activeCantina.coordinates.split(',')[0]),
                             lng: parseFloat(activeCantina.coordinates.split(',')[1]),
                         }}
-// Fix: Use the string literal 'floatPane' for the mapPaneName property.
                         mapPaneName={'floatPane'}
                         getPixelPositionOffset={getPixelPositionOffset}
                     >
@@ -422,7 +340,7 @@ const MapPage: React.FC = () => {
                             borderRadius: '8px',
                             boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                             fontFamily: 'Roboto, sans-serif',
-                            color: '#2F3E2C',
+                            color: '#4B2A1E',
                             width: '240px',
                             textAlign: 'center',
                         }}>
@@ -438,20 +356,20 @@ const MapPage: React.FC = () => {
                                     fontSize: '20px',
                                     lineHeight: 1,
                                     cursor: 'pointer',
-                                    color: '#4b2a1eff',
+                                    color: '#4B2A1E',
                                     padding: '4px'
                                 }}
                             >
                                 &times;
                             </button>
-                            <h3 style={{ color: '#2F3E2C', fontWeight: 'bold', margin: '0 0 4px 0', fontSize: '1.1rem' }}>{activeCantina.name}</h3>
+                            <h3 style={{ color: '#8C2D19', fontWeight: 'bold', margin: '0 0 4px 0', fontSize: '1.1rem' }}>{activeCantina.name}</h3>
                             <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem' }}>{activeCantina.locationName}</p>
                             <button
                                 onClick={() => handleGetDirections(activeCantina)}
                                 style={{
                                     width: '100%',
                                     padding: '8px 10px',
-                                    backgroundColor: '#2F3E2C   ',
+                                    backgroundColor: '#8C2D19',
                                     color: 'white',
                                     borderRadius: '4px',
                                     border: 'none',
@@ -469,7 +387,6 @@ const MapPage: React.FC = () => {
                 {animationComplete && activeEntryPoint && (
                     <OverlayViewF
                         position={{ lat: parseFloat(activeEntryPoint.coordinates.split(',')[0]), lng: parseFloat(activeEntryPoint.coordinates.split(',')[1]) }}
-// Fix: Use the string literal 'floatPane' for the mapPaneName property.
                         mapPaneName={'floatPane'}
                         getPixelPositionOffset={getPixelPositionOffset}
                     >
@@ -530,11 +447,6 @@ const MapPage: React.FC = () => {
                     </OverlayViewF>
                 )}
             </GoogleMap>
-            {showTouchHint && (
-                <div className="absolute top-24 right-14 z-10 p-1 bg-black/50 text-white text-center text-md rounded-md shadow-lg pointer-events-none animate-fade-in">
-                    Usa due dita per muovere la mappa
-                </div>
-            )}
             <div className={`absolute top-4 left-1/2 -translate-x-1/2 z-10 flex flex-wrap justify-center gap-2 transition-opacity duration-500 ${animationComplete ? 'opacity-100' : 'opacity-0'}`}>
                 <button onClick={handleFlyToUserLocation} className="flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-lg text-white bg-brand-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary transition-all transform hover:scale-105">
                     <span className="mr-1.5 text-lg" role="img" aria-label="posizione">🧍</span>
